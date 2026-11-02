@@ -21,7 +21,7 @@ const mobileOsData = {
     },
     ios: {
       label: "iOS",
-      qrPath: "/images/iOS_QR.png",
+      qrPath: "/images/IOS_QR.png",
       qrAlt: "iOS TestFlight QR",
       title: "iOS 설치 가이드",
       guide: (
@@ -54,7 +54,7 @@ const mobileOsData = {
     },
     ios: {
       label: "iOS",
-      qrPath: "/images/iOS_QR.png",
+      qrPath: "/images/IOS_QR.png",
       qrAlt: "iOS TestFlight QR",
       title: "iOS Installation Guide",
       guide: (
