@@ -45,7 +45,10 @@ const mobileOsData = {
           1. Scan the QR code with your default camera app.
           <br />
           2. Download and run the{" "}
-          <strong className="font-bold text-orange-500">APK installation file</strong> provided from the link.
+          <strong className="font-bold text-orange-500">
+            APK installation file
+          </strong>{" "}
+          provided from the link.
         </>
       ),
     },
@@ -58,7 +61,9 @@ const mobileOsData = {
         <>
           1. Scan the QR code with your default camera app.
           <br />
-          2. Accept <strong className="font-bold text-[#FF7A59]">TestFlight</strong> and download the beta version.
+          2. Accept{" "}
+          <strong className="font-bold text-[#FF7A59]">TestFlight</strong> and
+          download the beta version.
         </>
       ),
     },
