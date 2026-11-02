@@ -19,14 +19,13 @@ import React, { useEffect, useRef, useState } from "react";
 import {
   ActivityIndicator,
   Alert,
-  KeyboardAvoidingView,
-  Platform,
   ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
 } from "react-native";
+import { KeyboardAvoidingView } from "react-native-keyboard-controller";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function GatheringDetailPage() {
@@ -156,7 +155,10 @@ export default function GatheringDetailPage() {
           {
             text: "삭제",
             style: "destructive",
-            onPress: () => deleteGatheringMutation(),
+            onPress: () => {
+              deleteGatheringMutation();
+              router.replace("/");
+            },
           },
         ],
       );
@@ -235,10 +237,7 @@ export default function GatheringDetailPage() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <KeyboardAvoidingView
-        style={styles.container}
-        behavior={Platform.OS === "ios" ? "padding" : undefined}
-      >
+      <KeyboardAvoidingView style={styles.container} behavior={"padding"}>
         <View style={styles.header}>
           <TouchableOpacity
             onPress={() => router.back()}

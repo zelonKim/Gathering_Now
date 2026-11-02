@@ -14,6 +14,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+// import { KeyboardAvoidingView } from "react-native-keyboard-controller";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function LoginScreen() {
@@ -50,9 +51,9 @@ export default function LoginScreen() {
         >
           <View style={styles.innerContainer}>
             <View style={styles.header}>
-              <Text style={styles.title}>Zelon{"\n"}Gathering</Text>
+              <Text style={styles.title}>Gathering {"\n"}Now</Text>
               <Text style={styles.subtitle}>
-                외출 준비 완료! 🍑{"\n"}지금 내 주변 힙한 소모임 속으로
+                외출 준비 완료! {"\n"}지금 내 주변 힙한 소모임 속으로 🍑
               </Text>
             </View>
 
@@ -160,12 +161,12 @@ const styles = StyleSheet.create({
   scrollContainer: {
     flexGrow: 1,
     paddingHorizontal: 24,
-    paddingTop: 40,
+    paddingTop: 60,
     paddingBottom: 40,
   },
   innerContainer: {
     flex: 1,
-    justifyContent: "space-between",
+    gap: 24,
   },
   header: {
     marginTop: 20,

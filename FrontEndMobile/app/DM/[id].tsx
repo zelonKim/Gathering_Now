@@ -11,14 +11,13 @@ import {
   ActivityIndicator,
   FlatList,
   Image,
-  KeyboardAvoidingView,
-  Platform,
   StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
   View,
 } from "react-native";
+import { KeyboardAvoidingView } from "react-native-keyboard-controller";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { io, Socket } from "socket.io-client";
 
@@ -231,11 +230,7 @@ export default function PrivateChatPage() {
         </View>
       </View>
 
-      <KeyboardAvoidingView
-        style={styles.keyboardView}
-        behavior={Platform.OS === "ios" ? "padding" : undefined}
-        keyboardVerticalOffset={Platform.OS === "ios" ? 90 : 0}
-      >
+      <KeyboardAvoidingView style={styles.keyboardView} behavior={"padding"}>
         {isMessagesLoading ? (
           <View style={styles.centerContainer}>
             <Text style={styles.loadingText}>대화 내역을 불러오는 중...</Text>
@@ -247,17 +242,19 @@ export default function PrivateChatPage() {
             </Text>
           </View>
         ) : (
-          <FlatList
-            ref={flatListRef}
-            data={chatMessages}
-            keyExtractor={(item) => String(item.id)}
-            renderItem={renderMessageItem}
-            contentContainerStyle={styles.messageListContent}
-            showsVerticalScrollIndicator={false}
-            onContentSizeChange={() =>
-              flatListRef.current?.scrollToEnd({ animated: true })
-            }
-          />
+          <View style={{ backgroundColor: "#FBFBF9", flex: 1 }}>
+            <FlatList
+              ref={flatListRef}
+              data={chatMessages}
+              keyExtractor={(item) => String(item.id)}
+              renderItem={renderMessageItem}
+              contentContainerStyle={styles.messageListContent}
+              showsVerticalScrollIndicator={false}
+              onContentSizeChange={() =>
+                flatListRef.current?.scrollToEnd({ animated: true })
+              }
+            />
+          </View>
         )}
 
         <View style={styles.inputContainer}>
@@ -294,7 +291,7 @@ export default function PrivateChatPage() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#F5F5F4",
+    backgroundColor: "#FFFFFF",
   },
   keyboardView: {
     flex: 1,
@@ -305,6 +302,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 24,
     gap: 8,
+    backgroundColor: "#FBFBF9",
   },
   loadingText: {
     fontSize: 15,
@@ -316,6 +314,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     padding: 24,
+    backgroundColor: "#FBFBF9",
   },
   emptyText: {
     fontSize: 15,

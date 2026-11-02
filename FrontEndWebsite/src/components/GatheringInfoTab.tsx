@@ -112,15 +112,23 @@ export function GatheringInfoTab({
           <div className="flex items-center gap-1.5">
             <Calendar className="w-3.5 h-3.5 text-[#FF7A59]" />
             <span>
-              {DAY_MAPS[gathering.gatheringDay as Day] ||
-                gathering.gatheringDay}
+              {Array.isArray(gathering.gatheringDay)
+                ? gathering.gatheringDay
+                    .map((day) => DAY_MAPS[day as Day] || day)
+                    .join(", ")
+                : DAY_MAPS[gathering.gatheringDay as Day] ||
+                  gathering.gatheringDay}
             </span>
           </div>
           <div className="flex items-center gap-1.5">
             <Clock className="w-3.5 h-3.5 text-[#FF7A59]" />
             <span>
-              {TIME_MAPS[gathering.gatheringTime as Time] ||
-                gathering.gatheringTime}
+              {Array.isArray(gathering.gatheringTime)
+                ? gathering.gatheringTime
+                    .map((time) => TIME_MAPS[time as Time] || time)
+                    .join(", ")
+                : TIME_MAPS[gathering.gatheringTime as Time] ||
+                  gathering.gatheringTime}
             </span>
           </div>
         </div>

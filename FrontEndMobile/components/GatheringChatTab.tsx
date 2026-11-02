@@ -5,7 +5,6 @@ import React, { useEffect, useRef } from "react";
 import {
   FlatList,
   Image,
-  KeyboardAvoidingView,
   Platform,
   StyleSheet,
   Text,
@@ -13,6 +12,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { KeyboardAvoidingView } from "react-native-keyboard-controller";
 
 export function GatheringChatTab({
   chatMessages,

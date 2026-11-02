@@ -4,7 +4,7 @@ import { GatheringParticipant } from "@/types/GatheringDetail";
 import { GatheringInfoTabProps } from "@/types/GatheringInfoTabProps";
 import { Time } from "@/types/Time";
 import { Feather, FontAwesome5, Ionicons } from "@expo/vector-icons";
-import { router } from "expo-router"
+import { router } from "expo-router";
 import React, { useState } from "react";
 import {
   ActivityIndicator,
@@ -32,7 +32,6 @@ export function GatheringInfoTab({
   DAY_MAPS,
   TIME_MAPS,
 }: GatheringInfoTabProps) {
-
   const [selectedParticipant, setSelectedParticipant] =
     useState<GatheringParticipant | null>(null);
 
@@ -51,7 +50,7 @@ export function GatheringInfoTab({
   const selectedUserId =
     selectedParticipant?.user?.id || selectedParticipant?.userId;
 
-    ///////////////////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////////////////
 
   return (
     <ScrollView style={styles.container} contentContainerStyle={styles.content}>
@@ -112,15 +111,23 @@ export function GatheringInfoTab({
           <View style={styles.infoRow}>
             <Feather name="calendar" size={14} color="#FF7A59" />
             <Text style={styles.infoText}>
-              {DAY_MAPS[gathering.gatheringDay as Day] ||
-                gathering.gatheringDay}
+              {Array.isArray(gathering.gatheringDay)
+                ? gathering.gatheringDay
+                    .map((day) => DAY_MAPS[day as Day] || day)
+                    .join(", ")
+                : DAY_MAPS[gathering.gatheringDay as Day] ||
+                  gathering.gatheringDay}
             </Text>
           </View>
           <View style={styles.infoRow}>
             <Feather name="clock" size={14} color="#FF7A59" />
             <Text style={styles.infoText}>
-              {TIME_MAPS[gathering.gatheringTime as Time] ||
-                gathering.gatheringTime}
+              {Array.isArray(gathering.gatheringTime)
+                ? gathering.gatheringTime
+                    .map((time) => TIME_MAPS[time as Time] || time)
+                    .join(", ")
+                : TIME_MAPS[gathering.gatheringTime as Time] ||
+                  gathering.gatheringTime}
             </Text>
           </View>
         </View>
@@ -132,7 +139,6 @@ export function GatheringInfoTab({
           {gathering.description || "등록된 소개글이 없습니다."}
         </Text>
       </View>
-
 
       <View style={styles.membersSection}>
         <Text style={styles.sectionTitle}>
@@ -189,7 +195,6 @@ export function GatheringInfoTab({
                   </View>
                 </TouchableOpacity>
 
-
                 {isHost && participantUserId !== myId && (
                   <TouchableOpacity
                     activeOpacity={0.8}
@@ -209,7 +214,6 @@ export function GatheringInfoTab({
           })}
         </View>
       </View>
-
 
       <Modal
         visible={!!selectedParticipant}

@@ -3,6 +3,7 @@ import { Time } from "@/types/Time";
 import { Feather } from "@expo/vector-icons";
 import React from "react";
 import {
+  Platform,
   ScrollView,
   StyleSheet,
   Text,
@@ -169,33 +170,35 @@ export function PlaceSelector({
   return (
     <View style={[styles.container, { marginTop: 12 }]}>
       <Text style={styles.label}>모임 장소 지정</Text>
-      <TouchableOpacity
-        activeOpacity={0.85}
-        onPress={onOpenMap}
-        style={[
-          styles.mapButton,
-          hasSelectedCoords
-            ? styles.mapButtonCompleted
-            : styles.mapButtonDefault,
-        ]}
-      >
-        <Feather
-          name="layers"
-          size={16}
-          color={hasSelectedCoords ? "#FFFFFF" : "#FF7A59"}
-        />
-        <Text
+
+      {Platform.OS === "android" && (
+        <TouchableOpacity
+          activeOpacity={0.85}
+          onPress={onOpenMap}
           style={[
-            styles.mapButtonText,
-            hasSelectedCoords ? { color: "#FFFFFF" } : { color: "#FF7A59" },
+            styles.mapButton,
+            hasSelectedCoords
+              ? styles.mapButtonCompleted
+              : styles.mapButtonDefault,
           ]}
         >
-          {hasSelectedCoords
-            ? "위치 지정 완료 (다시 선택)"
-            : "지도에서 모임 장소 찍기 📍"}
-        </Text>
-      </TouchableOpacity>
-
+          <Feather
+            name="layers"
+            size={16}
+            color={hasSelectedCoords ? "#FFFFFF" : "#FF7A59"}
+          />
+          <Text
+            style={[
+              styles.mapButtonText,
+              hasSelectedCoords ? { color: "#FFFFFF" } : { color: "#FF7A59" },
+            ]}
+          >
+            {hasSelectedCoords
+              ? "위치 지정 완료 (다시 선택)"
+              : "지도에서 모임 장소 찍기 📍"}
+          </Text>
+        </TouchableOpacity>
+      )}
       <TextInput
         placeholder="상세 장소명을 입력해주세요"
         placeholderTextColor="#A8A29E"

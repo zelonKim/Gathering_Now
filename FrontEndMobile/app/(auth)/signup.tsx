@@ -5,7 +5,6 @@ import React, { useState } from "react";
 import {
   ActivityIndicator,
   Alert,
-  KeyboardAvoidingView,
   Platform,
   ScrollView,
   StyleSheet,
@@ -14,6 +13,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { KeyboardAvoidingView } from "react-native-keyboard-controller";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function SignupScreen() {
@@ -56,7 +56,7 @@ export default function SignupScreen() {
     });
   };
 
-/////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////
 
   return (
     <SafeAreaView style={styles.container}>
@@ -156,7 +156,6 @@ export default function SignupScreen() {
 }
 
 /////////////////////////////////////////////////////////////////////
-
 
 const styles = StyleSheet.create({
   container: {

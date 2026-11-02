@@ -1,13 +1,13 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 const qrModalTexts = {
   ko: {
-    title: "Zelon Gathering 앱 설치",
+    title: "Gathering Now 앱 설치",
     subtitle: "스마트폰 카메라로 QR 코드를 스캔하세요",
     qrReady: "QR 준비 중",
   },
   en: {
-    title: "Install Zelon Gathering App",
+    title: "Install Gathering Now App",
     subtitle: "Scan the QR code with your smartphone camera",
     qrReady: "QR Preparing",
   },

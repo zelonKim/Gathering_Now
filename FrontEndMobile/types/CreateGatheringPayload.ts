@@ -9,8 +9,8 @@ export interface CreateGatheringPayload {
   category: Category | null;
   maxParticipants: number | null;
   gatheringPlace: string | null;
-  latitude: number | null;
-  longitude: number | null;
+  latitude?: number | null;
+  longitude?: number | null;
   district: District | null;
   gatheringDay: Day[] | null;
   gatheringTime: Time[] | null;

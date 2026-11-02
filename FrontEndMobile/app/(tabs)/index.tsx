@@ -23,15 +23,16 @@ import { GET_KEY_BY_LABEL } from "@/utils/getKeyByLabel";
 import { toggleArrayItem } from "@/utils/toggleArrayItem";
 import { toggleFilter } from "@/utils/toggleFilter";
 import { Feather } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
 import { useQuery } from "@tanstack/react-query";
 import * as Location from "expo-location";
+import { useRouter } from "expo-router";
 import React, { useEffect, useState } from "react";
 import {
   ActivityIndicator,
   Alert,
   FlatList,
   Modal,
+  Platform,
   ScrollView,
   StatusBar,
   StyleSheet,
@@ -44,8 +45,7 @@ import { getGatherings } from "../api/gathering/getGatherings";
 import { getMyProfile } from "../api/profile/getMyProfile";
 
 export default function HomePage() {
-  const navigation = useNavigation<any>();
-
+  const router = useRouter();
   const [selectedTypes, setSelectedTypes] = useState<string[]>(["전체"]);
   const [selectedCategories, setSelectedCategories] = useState<string[]>([
     "전체",
@@ -71,7 +71,7 @@ export default function HomePage() {
   const [isLocationLoading, setIsLocationLoading] = useState(true);
   const [isMapModalOpen, setIsMapModalOpen] = useState(false);
   const [selectedPlaceCoords, setSelectedPlaceCoords] = useState<Coords | null>(
-    null,
+    DEFAULT_COORDS,
   );
 
   useEffect(() => {
@@ -162,10 +162,6 @@ export default function HomePage() {
       );
       return;
     }
-    if (!selectedPlaceCoords) {
-      Alert.alert("알림", "지도에서 모임 장소 위치를 지정해 주세요!");
-      return;
-    }
 
     if (
       !title ||
@@ -184,8 +180,8 @@ export default function HomePage() {
       category,
       maxParticipants: parsedMax,
       gatheringPlace,
-      latitude: selectedPlaceCoords.latitude,
-      longitude: selectedPlaceCoords.longitude,
+      latitude: selectedPlaceCoords?.latitude,
+      longitude: selectedPlaceCoords?.longitude,
       district,
       gatheringDay,
       gatheringTime,
@@ -209,7 +205,7 @@ export default function HomePage() {
     return (
       <TouchableOpacity
         activeOpacity={0.7}
-        onPress={() => navigation.navigate("GatheringDetail", { id: item.id })}
+        onPress={() => router.push(`/gatherings/${item.id}`)}
         style={styles.card}
       >
         <View>
@@ -283,15 +279,15 @@ export default function HomePage() {
           <View style={styles.dropdownContainer}>
             <View style={styles.dropdownHeader}>
               <Feather name="check-circle" size={16} color="#FF7A59" />
-              <Text style={styles.dropdownTitle}>내가 참여 중인 소모임</Text>
+              <Text style={styles.dropdownTitle}>내가 참여중인 소모임</Text>
             </View>
-            <ScrollView style={{ maxHeight: 250 }}>
+            <ScrollView style={{ maxHeight: 350 }}>
               {myJoinedGatherings.map((jg: JoinGatheringInfo, idx: number) => (
                 <TouchableOpacity
                   key={jg.id || idx}
                   onPress={() => {
                     setIsDropdownOpen(false);
-                    navigation.navigate("GatheringDetail", { id: jg.id });
+                    router.push(`/gatherings/${jg.id}`);
                   }}
                   style={styles.dropdownItem}
                 >
@@ -405,17 +401,19 @@ export default function HomePage() {
           <ActivityIndicator size="large" color="#FF7A59" />
         </View>
       ) : (
-        <FlatList
-          data={gatherings}
-          keyExtractor={(item) => item.id.toString()}
-          renderItem={renderGatheringItem}
-          contentContainerStyle={styles.listContainer}
-          ListEmptyComponent={
-            <Text style={styles.emptyListText}>
-              주변에 열린 소모임방이 존재하지 않습니다
-            </Text>
-          }
-        />
+        <View style={styles.cardListContainer}>
+          <FlatList
+            data={gatherings}
+            keyExtractor={(item) => item.id.toString()}
+            renderItem={renderGatheringItem}
+            contentContainerStyle={styles.listContainer}
+            ListEmptyComponent={
+              <Text style={styles.emptyListText}>
+                주변에 열린 소모임방이 존재하지 않습니다
+              </Text>
+            }
+          />
+        </View>
       )}
 
       <TouchableOpacity
@@ -480,8 +478,8 @@ export default function HomePage() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: "#FBFBF9",
+    flex: 1,
   },
   header: {
     flexDirection: "row",
@@ -489,17 +487,15 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingHorizontal: 20,
     paddingVertical: 16,
-    borderBottomWidth: 1,
-    borderBottomColor: "#E7E5E4",
   },
   logoText: {
-    fontSize: 28,
+    fontSize: 30,
     fontWeight: "900",
     color: "#FF7A59",
     letterSpacing: -0.5,
   },
   subLogoText: {
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: "700",
     color: "#292524",
     marginTop: 2,
@@ -522,7 +518,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "rgba(0,0,0,0.2)",
     alignItems: "flex-end",
-    paddingTop: 70,
+    paddingTop: Platform.OS === "ios" ? 120 : 110,
     paddingRight: 20,
   },
   dropdownContainer: {
@@ -556,7 +552,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    paddingVertical: 8,
+    paddingVertical: 12,
   },
   dropdownItemLeft: {
     flexDirection: "row",
@@ -583,7 +579,8 @@ const styles = StyleSheet.create({
   },
   filterSection: {
     paddingHorizontal: 16,
-    paddingTop: 12,
+    paddingTop: 3,
+
     gap: 8,
   },
   filterRow: {
@@ -633,7 +630,7 @@ const styles = StyleSheet.create({
   },
   listContainer: {
     padding: 16,
-    gap: 12,
+    gap: 3,
   },
   card: {
     backgroundColor: "#FFFFFF",
@@ -687,7 +684,7 @@ const styles = StyleSheet.create({
   },
   fab: {
     position: "absolute",
-    bottom: 30,
+    bottom: 32,
     right: 20,
     width: 56,
     height: 56,
@@ -701,4 +698,5 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.3,
     shadowRadius: 4,
   },
+  cardListContainer: { marginBottom: 140 },
 });

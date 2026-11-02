@@ -10,6 +10,7 @@ import React from "react";
 import {
   ActivityIndicator,
   FlatList,
+  Platform,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -68,8 +69,8 @@ export default function MatchingPage() {
   const renderEmpty = () => (
     <View style={styles.emptyContainer}>
       <Text style={styles.emptyText}>아직 들어온 매칭 알림이 없습니다!</Text>
-      <Text style={[styles.emptyText, { marginTop: 8 }]}>
-        매칭 알림을 받고 싶다면, 소모임 취향 프로필을 작성해주세요 ✏️
+      <Text style={[styles.emptyText, { marginTop: 8, lineHeight: 24 }]}>
+        매칭 알림을 받고 싶다면, {"\n"}소모임 취향 프로필을 작성해주세요 ✏️
       </Text>
     </View>
   );
@@ -151,7 +152,7 @@ export default function MatchingPage() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    marginBottom: Platform.OS === "ios" ? -40 : -50,
     backgroundColor: "#FBFBF9",
   },
   centerContainer: {

@@ -44,7 +44,7 @@ export function MobileQrModal({ isOpen, onClose }: MobileQrModalProps) {
           </TouchableOpacity>
 
           <View style={styles.header}>
-            <Text style={styles.title}>Zelon Gathering 앱 설치</Text>
+            <Text style={styles.title}>Gathering Now 앱 설치</Text>
             <Text style={styles.subtitle}>
               스마트폰 카메라로 QR 코드를 스캔하세요
             </Text>

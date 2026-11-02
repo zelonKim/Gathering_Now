@@ -83,7 +83,7 @@ export default function LoginPage() {
 
             <div className="flex flex-col gap-1.5">
               <label className="text-sm font-bold text-[#78716C]">
-                {t.passwordLabel} 
+                {t.passwordLabel}
               </label>
 
               <div className="w-full flex items-center bg-white border border-[#E7E5E4] rounded-[14px] px-4 focus-within:ring-2 focus-within:ring-[#FF7A59]/20 focus-within:border-[#FF7A59] transition">

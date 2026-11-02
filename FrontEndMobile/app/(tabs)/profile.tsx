@@ -21,6 +21,7 @@ import {
   ActivityIndicator,
   Alert,
   Image,
+  Platform,
   ScrollView,
   StyleSheet,
   Text,
@@ -599,7 +600,7 @@ export default function ProfilePage() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    marginBottom: Platform.OS === "ios" ? -35 : -50,
     backgroundColor: "#FBFBF9",
   },
   centerContainer: {
@@ -625,7 +626,7 @@ const styles = StyleSheet.create({
   },
   scrollContent: {
     paddingHorizontal: 16,
-    paddingBottom: 48,
+    paddingBottom: 12,
     gap: 16,
   },
   header: {
@@ -872,7 +873,7 @@ const styles = StyleSheet.create({
     fontWeight: "700",
   },
   saveButton: {
-    marginTop: 20,
+    marginTop: 10,
     backgroundColor: "#292524",
     paddingVertical: 16,
     borderRadius: 12,

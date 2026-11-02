@@ -9,6 +9,7 @@ import {
   ActivityIndicator,
   FlatList,
   Image,
+  Platform,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -78,7 +79,7 @@ export default function ChatsScreen() {
       <TouchableOpacity
         activeOpacity={0.8}
         onPress={() => {
-          router.push(`/gatherings/${item.id}?tab=CHAT`)
+          router.push(`/gatherings/${item.id}?tab=CHAT`);
         }}
         style={styles.chatCard}
       >
@@ -204,40 +205,44 @@ export default function ChatsScreen() {
                 activeTab === "DM" && styles.activeTabText,
               ]}
             >
-              👤 DM
+              ✉️ DM
             </Text>
           </TouchableOpacity>
         </View>
       </View>
 
       {activeTab === "Gathering" ? (
-        <FlatList
-          data={gatheringChats}
-          keyExtractor={(item) => item.id.toString()}
-          renderItem={renderGatheringItem}
-          contentContainerStyle={styles.listContainer}
-          ListEmptyComponent={
-            <View style={styles.emptyContainer}>
-              <Text style={styles.emptyText}>
-                현재 참여 중인 소모임 채팅방이 없습니다.
-              </Text>
-            </View>
-          }
-        />
+        <View style={styles.cardListContainer}>
+          <FlatList
+            data={gatheringChats}
+            keyExtractor={(item) => item.id.toString()}
+            renderItem={renderGatheringItem}
+            contentContainerStyle={styles.listContainer}
+            ListEmptyComponent={
+              <View style={styles.emptyContainer}>
+                <Text style={styles.emptyText}>
+                  현재 참여 중인 소모임 채팅방이 없습니다.
+                </Text>
+              </View>
+            }
+          />
+        </View>
       ) : (
-        <FlatList
-          data={privateChats}
-          keyExtractor={(item) => item.id.toString()}
-          renderItem={renderDMItem}
-          contentContainerStyle={styles.listContainer}
-          ListEmptyComponent={
-            <View style={styles.emptyContainer}>
-              <Text style={styles.emptyText}>
-                진행 중인 1:1 대화가 없습니다.
-              </Text>
-            </View>
-          }
-        />
+        <View style={styles.cardListContainer}>
+          <FlatList
+            data={privateChats}
+            keyExtractor={(item) => item.id.toString()}
+            renderItem={renderDMItem}
+            contentContainerStyle={styles.listContainer}
+            ListEmptyComponent={
+              <View style={styles.emptyContainer}>
+                <Text style={styles.emptyText}>
+                  진행 중인 1:1 대화가 없습니다.
+                </Text>
+              </View>
+            }
+          />
+        </View>
       )}
     </SafeAreaView>
   );
@@ -245,9 +250,9 @@ export default function ChatsScreen() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: "#FBFBF9",
   },
+
   centerContainer: {
     flex: 1,
     backgroundColor: "#FBFBF9",
@@ -392,5 +397,9 @@ const styles = StyleSheet.create({
     color: "#78716C",
     textAlign: "center",
     lineHeight: 22,
+  },
+  cardListContainer: {
+    marginBottom: Platform.OS === "ios" ? 240 : 260,
+    backgroundColor: "#FBFBF9",
   },
 });

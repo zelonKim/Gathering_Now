@@ -1,4 +1,4 @@
-# 📱 Zelon Gathering - Mobile App (모바일 앱)
+# 📱 Gathering Now - Mobile App (모바일 앱)
 
 > **Built with Expo and React Native, providing key features such as meetup creation and exploration, chat, and map-based location selection.**
 >
