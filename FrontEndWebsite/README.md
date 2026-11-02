@@ -1,9 +1,9 @@
-# 🌐 ZelonGathering - Next.js Web Frontend (웹 프론트엔드)
+# 🌐 Gathering Now - Next.js Web Frontend (웹 프론트엔드)
 
-> **Frontend web application for ZelonGathering.**  
+> **Frontend web application for Gathering Now.**  
 > Built with Next.js App Router, it provides features including AI matching notifications, meetup creation and exploration, map interactions, and real-time WebSocket chat UI.
 >
-> `ZelonGathering`의 프론트엔드 웹입니다.  
+> `Gathering Now`의 프론트엔드 웹입니다.  
 > Next.js App Router 기반으로 구축되었으며, AI 매칭 알림, 소모임 개설 및 탐색, 지도 인터랙션, 실시간 웹소켓 채팅 UI를 제공합니다.
 
 ---

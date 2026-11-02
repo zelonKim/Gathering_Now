@@ -1,9 +1,9 @@
-# 🤖 ZelonGathering - FastAPI AI Engine (FastAPI AI 분석 및 매칭 엔진)
+# 🤖 Gathering Now - FastAPI AI Engine (FastAPI AI 분석 및 매칭 엔진)
 
-> **Microservice dedicated to AI analysis and meetup matching for the ZelonGathering platform.**  
+> **Microservice dedicated to AI analysis and meetup matching for the Gathering Now platform.**  
 > Receives meetup details, host profiles, and candidate user data from the NestJS main server to generate **compatibility scores and personalized push notification texts** via OpenAI LLM pipeline (Structured Outputs).
 >
-> `ZelonGathering` 서비스의 **AI 분석 및 매칭 전용 마이크로서비스** 서버입니다.  
+> `Gathering Now` 서비스의 **AI 분석 및 매칭 전용 마이크로서비스** 서버입니다.  
 > NestJS 메인 서버로부터 전달받은 소모임 정보, 방장 프로필, 매칭 후보군 데이터를 기반으로 OpenAI LLM 파이프라인을 통해 **매칭 스코어링과 맞춤 푸시 알림 문구**를 생성합니다.
 
 ---

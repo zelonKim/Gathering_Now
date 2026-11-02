@@ -1,4 +1,4 @@
-# 👋 ZelonGathering - AI-Powered Personalized Meetup Platform (AI 기반 맞춤형 소모임 매칭 플랫폼)
+# 👋 Gathering Now - AI-Powered Personalized Meetup Platform (AI 기반 맞춤형 소모임 매칭 플랫폼)
 
 > **Analyzes user profiles, interests, and activity preferences (location/time/day) from multiple dimensions to deliver optimal AI-driven meetup recommendations.**
 >
